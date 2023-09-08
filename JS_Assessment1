@@ -11,15 +11,31 @@ Assessment Requirements
 // create a variable to hold your NFT's
 const NFTs = []
 
+// create a random generated string function for an ID to improve security
+const generateRandomString = (length) => {
+  let result = '';
+  const characters =
+
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
 // this function will take in some values as parameters, create an
 // NFT object using the parameters passed to it for its metadata, 
 // and store it in the variable above.
-function mintNFT (name, eyeColor, shirtType, bling) {
+function mintNFT (name, eyeColor, shirtType, bling, hat) {
     const NFT = {
+          "ID": generateRandomString(30),
           "name": name,
           "eyeColor": eyeColor,
           "shirtType": shirtType,
-          "bling": bling
+          "bling": bling,
+          "hat": hat
     }
 
     NFTs.push(NFT);
@@ -30,11 +46,12 @@ function mintNFT (name, eyeColor, shirtType, bling) {
 // and print their metadata with console.log()
 function listNFTs () {
     for(let i = 0; i < NFTs.length; i++){
-        console.log("\nID: \t\t\t\t" + (i + 1));
+        console.log("\nID: \t\t\t\t" + NFTs[i].ID);
         console.log("Name: \t\t\t" + NFTs[i].name);
         console.log("Eyecolor: \t" + NFTs[i].eyeColor);
         console.log("Shirt Type: " + NFTs[i].shirtType);
         console.log("Bling: \t\t\t" + NFTs[i].bling);
+        console.log("Hat: \t\t\t\t\t" + NFTs[i].hat);
 
     } 
 }
@@ -45,10 +62,11 @@ function getTotalSupply() {
 }
 
 // call your functions below this line
-mintNFT("Bob", "Blue", "Hoodie", "Gold Chain");
-mintNFT("Sue", "Red", "Poloshirt", "Amulet");
-mintNFT("Hannah", "Pink", "Dress", "Diamond Ring");
-mintNFT("Michael", "BBlack", "Hoodie", "Gold Chain");
+mintNFT("Bob", "Blue", "Hoodie", "Gold Chain", "Baseball Cap");
+mintNFT("Sue", "Brown", "Poloshirt", "Amulet", "Bonnie Hat");
+mintNFT("Hannah", "Hazelnut", "Dress", "Diamond Ring", "Cowboy Hat");
+mintNFT("Michael", "Black", "Hoodie", "Gold Chain", "Umbrella Hat");
 listNFTs(); 
 getTotalSupply();
+
 
